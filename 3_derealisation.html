@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+	<link rel="apple-touch-icon" sizes="180x180" href="!ico/3apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="!ico/3favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="!ico/3favicon-16x16.png">
+	<title>・derealisation</title>
+	<link rel="stylesheet" href="3_derealisation.css">
+</head>
+<header>
+	<a href="index.html"><img src="!media/logo1.png" alt="WH01SME" class="logo1"></a>
+</header>
+<nav class="navigation">
+	<ul class="nav-ul">
+		<li class="nav-li"><a href="1_latest_release.html">latest release</a></li>
+		<li class="nav-li"><a href="2_about.html">about</a></li>
+		<li class="nav-li"><a href="3_derealisation.html">derealisation</a></li>
+		<li class="nav-li"><a href="4_first_rebirth.html">first rebirth</a></li>
+	</ul>
+</nav>
+<main>
+	<div class="background-image"></div>
+
+	<!--derealisation-->
+	<div class="dereal-info" id="derealisation">
+		<div class="dereal-info-header">
+			<div class="dereal-name">
+				<div class="dereal-text">derealisation.</div>
+				<div class="dereal-text">дереализация.</div>
+				<img src="!media/logo1.png" alt="derealisation" class="smallphoto">
+			</div>
+			<div class="about">
+				about
+				<p>derealisation.</p>
+				<p>дереализация.</p>
+			</div>
+			<div class="links">
+				<a href="https://open.spotify.com/album/17Trfn3ReyXMn3q26MBh5S?si=ACZU8H2VRnqr8yraRBzcaA">
+					<img src="!media/spotify.png" alt="spotify" class="ico">
+				</a>
+				<a href="https://www.deezer.com/en/album/533696412">
+					<img src="!media/deezer.png" alt="deezer" class="ico">
+				</a>
+				<a href="https://music.apple.com/us/album/derealisation-instrumental-versions-ep/1725269868">
+					<img src="!media/apple.png" alt="apple" class="ico">
+				</a>
+				<a href="https://music.youtube.com/playlist?list=OLAK5uy_niGQKPUjQqOCNHGP9eSgTdyr9c9EIT0FI">
+					<img src="!media/youtube.png" alt="youtube" class="ico">
+				</a>
+			</div>
+		</div>
+		<div class="dereal-body">
+			<div class="dereal-photo">
+				<img src="!media/logo1.png" alt="derealisation.">
+			</div>
+			<div class="dereal-about-text">
+				<p>
+					this is my absolutely first serious release on all platforms, my first experience of working with
+					distribution,
+					and in general my first experience of working with really normal sounding music.
+					previously i worked only with full experimentalism, and in no way even thought about going to
+					platforms.
+					but with the first track (which is also the first in the album) i realized that i need to go to
+					platforms,
+					that's for sure. the album as a whole turned out to be quite melodic, and a lot of people loved the
+					last track in particular.
+					i also think that this track was my best in terms of processing, and it's also the longest track on
+					the album, which i'm proud of.
+				</p>
+			</div>
+		</div>
+	</div>
+
+	<div class="infos"><i>„Manchmal muss man eine Idee leben, um sie in die Welt zu bringen.“</i></div>
+	<footer>
+		<div class="footer-text">&copy; Ihor Tienietilov <strong>・</strong> <a href="mailto:igor.tyenyetilov@gmail.com">igor.tyenyetilov@gmail.com</a></div>
+	</footer>
+</main>
+<script class="script">
+	document.addEventListener('DOMContentLoaded', function ()
+	{
+		const header = document.getElementById('header');
+		const nav = document.getElementById('nav');
+		const headerBottom = header.offsetTop + header.offsetHeight;
+
+		function onScroll() {
+			if (window.pageYOffset >= headerBottom) {
+				nav.classList.add('fixed-nav');
+			} else {
+				nav.classList.remove('fixed-nav');
+			}
+		}
+
+		window.addEventListener('scroll', onScroll);
+	});
+</script>
+</body>
+</html>

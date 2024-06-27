@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+	<link rel="apple-touch-icon" sizes="180x180" href="!ico/2apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="!ico/2favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="!ico/2favicon-16x16.png">
+	<title>・welcome</title>
+	<link rel="stylesheet" href="0_welcome.css">
+</head>
+<header>
+	<a href="index.html"><img src="!media/logo1.png" alt="WH01SME" class="logo1"></a>
+</header>
+<nav class="navigation">
+	<ul class="nav-ul">
+		<li class="nav-li"><a href="1_latest_release.html">latest release</a></li>
+		<li class="nav-li"><a href="2_about.html">about</a></li>
+		<li class="nav-li"><a href="3_derealisation.html">derealisation</a></li>
+		<li class="nav-li"><a href="4_first_rebirth.html">first rebirth</a></li>
+	</ul>
+</nav>
+<main>
+	<div class="background-image"></div>
+
+	<!-- welcome -->
+	<div class="welcome">
+		<h1>Welcome</h1>
+		<p>hi! my name is igor and this is my website about my main hobby: music.
+			there is a lot of interesting stuff here! you can use the navigation bar above to move between pages
+		</p>
+		<h3>a little snippet of my new track</h3>
+		<audio controls>
+			<source src="!media/snippet.mp3" type="audio/mpeg">
+			Your browser does not support the audio tag.
+		</audio>
+	</div>
+
+	<div class="infos"><i>„Manchmal muss man eine Idee leben, um sie in die Welt zu bringen.“</i></div>
+	<footer>
+		<div class="footer-text">&copy; Ihor Tienietilov <strong>・</strong> <a href="mailto:igor.tyenyetilov@gmail.com">igor.tyenyetilov@gmail.com</a></div>
+	</footer>
+</main>
+<script class="script">
+	document.addEventListener('DOMContentLoaded', function ()
+	{
+		const header = document.getElementById('header');
+		const nav = document.getElementById('nav');
+		const headerBottom = header.offsetTop + header.offsetHeight;
+
+		function onScroll() {
+			if (window.pageYOffset >= headerBottom) {
+				nav.classList.add('fixed-nav');
+			} else {
+				nav.classList.remove('fixed-nav');
+			}
+		}
+
+		window.addEventListener('scroll', onScroll);
+	});
+</script>
+</body>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Balsamiq+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+	<link rel="apple-touch-icon" sizes="180x180" href="!ico/1apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="!ico/1favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="!ico/1favicon-16x16.png">
+	<title>・about me</title>
+	<link rel="stylesheet" href="2_about.css">
+</head>
+<header>
+	<a href="index.html"><img src="!media/logo1.png" alt="WH01SME" class="logo1"></a>
+</header>
+<nav class="navigation">
+	<ul class="nav-ul">
+		<li class="nav-li"><a href="1_latest_release.html">latest release</a></li>
+		<li class="nav-li"><a href="2_about.html">about</a></li>
+		<li class="nav-li"><a href="3_derealisation.html">derealisation</a></li>
+		<li class="nav-li"><a href="4_first_rebirth.html">first rebirth</a></li>
+	</ul>
+</nav>
+<main>
+	<div class="background-image"></div>
+
+	<!--artist info-->
+	<div class="artist-info" id="about">
+		<div class="artist-info-header">
+			<div class="artist-name">
+				<div class="artist-text">wh01sme</div>
+				<div class="artist-text">Ihor</div>
+				<img src="!media/photo.jpg" alt="Artist photo" class="smallphoto">
+			</div>
+			<div class="about">
+				about
+				<p>wh01sme</p>
+				<p>Ihor</p>
+			</div>
+			<div class="links">
+				<a href="https://open.spotify.com/artist/69M2CMczD1QF9wBPieWhqi?si=ZpuJUT2pSsmdQp25vzCBiA">
+					<img src="!media/spotify.png" alt="spotify" class="ico">
+				</a>
+				<a href="https://www.youtube.com/@wh01sme">
+					<img src="!media/youtube.png" alt="youtube" class="ico">
+				</a>
+				<a href="https://www.instagram.com/imanothing11">
+					<img src="!media/instagram.png" alt="instagram" class="ico">
+				</a>
+				<a href="https://t.me/wh01sme_music">
+					<img src="!media/telegram.png" alt="telegram" class="ico">
+				</a>
+			</div>
+		</div>
+		<div class="artist-body">
+			<div class="artist-photo">
+				<img src="!media/photo.jpg" alt="Artist Photo">
+			</div>
+			<div class="artist-about-text">
+				<p>i am an aspiring artist in the genre of breakcore and other subgenres. born in kiev, currently living
+					in switzerland, i've been doing music for about two or three years, but started to be active at the
+					end of fall 2023.</p>
+				<p>who inspires me:</p>
+				<p>
+					<strong>・<a
+							href="https://open.spotify.com/artist/4Kdoc0XdqBQaa3vgHj7mX9?si=PnCyIj_oS0-f7CqrXhuksg">dekma</a></strong>
+					- experimental hip-hop<br>
+					<strong>・<a
+							href="https://open.spotify.com/artist/3jiFQ3NPFm9VvzDragD4av?si=wHnDDTMXTryQV9m9003k2g">takizava</a></strong>
+					- experimental<br>
+					<strong>・<a
+							href="https://open.spotify.com/artist/1Kvu06TxgDMSFkoYQEj6Rv?si=xi96FCd6Q9eeHDKizcU34w">JOHNNASCUS</a></strong>
+					- experimental<br>
+					<strong>・<a
+							href="https://open.spotify.com/artist/5UezsklPScipW64XJm7qql?si=vnXA3pivRgCjcGAph-lBAA">Merzbow</a></strong>
+					- harsh-noise<br>
+					<strong>・<a
+							href="https://open.spotify.com/artist/496nklFjflGjJOhhfhH2Nc?si=GS3LZVlhRWWXRxDEHKg4VQ">17
+							SEVENTEEN</a></strong> - russian hyperpop<br>
+					<strong>・<a
+							href="https://open.spotify.com/artist/5pfVvTVQiPCMClDlE3bj0S?si=F2SAWt72RaaLY_rH7VFvKg">m1v</a></strong>
+					- english hyperpop<br>
+					<strong>・<a
+							href="https://open.spotify.com/artist/30F64wQIHvLiFTGaNZ73nU?si=f9jb9L-YTTmHp2PVxLxJcw">Sewerslvt</a>
+						(<a
+							href="https://open.spotify.com/artist/79W7uIUU51RwgRFeYeRrP6?si=7kRG4cSnT0WzRM7w68bAWw">Cynthoni</a>)</strong>
+					- breakcore<br>
+					<strong>・<a
+							href="https://open.spotify.com/artist/0RfocEzLe78RexLTeU1K2p?si=922w9Cy0QWeKWmPWPl-g8Q">ssshhhhhiiittt!</a></strong>
+					- russian industrial rock<br>
+				</p>
+			</div>
+		</div>
+	</div>
+
+	<div class="infos"><i>„Manchmal muss man eine Idee leben, um sie in die Welt zu bringen.“</i></div>
+	<footer>
+		<div class="footer-text">&copy; Ihor Tienietilov <strong>・</strong> <a href="mailto:igor.tyenyetilov@gmail.com">igor.tyenyetilov@gmail.com</a></div>
+	</footer>
+</main>
+<script class="script">
+	document.addEventListener('DOMContentLoaded', function ()
+	{
+		const header = document.getElementById('header');
+		const nav = document.getElementById('nav');
+		const headerBottom = header.offsetTop + header.offsetHeight;
+
+		function onScroll() {
+			if (window.pageYOffset >= headerBottom) {
+				nav.classList.add('fixed-nav');
+			} else {
+				nav.classList.remove('fixed-nav');
+			}
+		}
+
+		window.addEventListener('scroll', onScroll);
+	});
+</script>
+</body>
+</html>

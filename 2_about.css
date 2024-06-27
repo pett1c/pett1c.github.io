@@ -1,0 +1,249 @@
+/* VARS */
+* {
+	--my-lightwhite: #EEF0FA;
+	--my-lightgray: #242424;
+	--emerald: #50C878;
+	--my-yellow: #C65D00;
+	--my-blue: #000080;
+	--my-lightblue: #4338BE;
+}
+
+@media (max-width: 738px){
+	.artist-photo {
+		display: none;
+	}
+	
+	.artist-text {
+		display: none;
+	}
+	
+	.smallphoto {
+		display: block !important;
+	}
+	
+	.artist-about-text {
+		width: 100%;
+	}
+
+	.about p {
+		display: block !important;
+	}
+}
+/* HEADER */
+header {
+	top: 0;
+	left: 0;
+	background-image: url('!media/bg_header.png');
+	background-size: cover;
+	background-position: center;
+	height: 200px;
+	padding: 20px;
+}
+
+.logo1 {
+	display: block;
+	margin: 0 auto;
+	width: 125px;
+	height: auto;
+	margin-top: 90px;
+	border-radius: 45px;
+}
+
+/* NAVIGATION */
+.navigation {
+	position: sticky;
+	top: 0;
+	z-index: 1000;
+	width: 100%;
+	background-color: var(--my-lightblue);
+	padding: 10px 0;
+}
+
+/* RESPONSIVE NAVIGATION: MOBILE */
+@media (max-width: 738px){
+	.navigation{
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+}
+
+/* RESPONSIVE NAVIGATION: DESKTOP */
+@media (min-width: 739px){
+	.navigation{
+		display: flex;
+		justify-content: start;
+	}
+	.nav-ul{
+		display: flex;
+		justify-content: start;
+	}
+	.nav-li{
+		display: flex;
+		justify-content: start;
+		display: inline-block;
+	}
+}
+
+/* NAVIGATION: OTHER */
+.nav-ul{
+	list-style: none;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+.nav-li{
+	margin-right: 20px;
+	flex: 1;
+	text-align: center;
+}
+
+nav a {
+	display: block;
+	padding: 10px 15px;
+	font-family: "Balsamiq Sans", sans-serif;
+	text-decoration: none;
+	color: var(--my-lightwhite);
+	font-weight: bold;
+}
+
+nav a:hover {
+	background-color: #005EFC;
+	border-radius: 30px;
+}
+
+/* BODY BACKGROUND */
+.background-image {
+	background-image: url('!media/background.png');
+	background-size: cover; 
+	background-position: center; 
+	height: 100%; 
+	width: 100%; 
+	top: 0; 
+	left: 0;
+	position: fixed; 
+	z-index: -1;
+}
+
+/* BLOCK #2: ARTIST INFO */
+.artist-info {
+    display: flex;
+    flex-direction: column;
+    font-family: "Balsamiq Sans", sans-serif;
+    width: 80%;
+    margin: 0 auto;
+	background-color: var(--my-lightgray);
+	border-radius: 25px;
+	margin-bottom: 100px;
+	margin-top: 100px;
+}
+
+.artist-info-header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px;
+	color: var(--my-lightwhite);
+}
+
+.artist-name, .about, .links {
+    flex: 1;
+    text-align: center;
+    padding: 10px;
+	color: var(--my-lightwhite);
+}
+
+.about p {
+	display: none;
+}
+
+.artist-name {
+    text-align: left;
+}
+
+.smallphoto {
+	display: none;
+	width: 75px;
+	height: 75px;
+	padding: 5px;
+	border-radius: 20%;
+}
+
+.links {
+    text-align: right;
+	margin-right: 25px;
+}
+
+.links a {
+    display: inline-block;
+    margin-left: 10px;
+	color: var(--my-lightwhite);
+}
+
+.ico{
+	width: 32px;
+	height: 32px;
+}
+
+/* PHOTO AND ABOUT TEXT SECTION */
+.artist-body {
+    display: flex;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.artist-photo {
+    width: 25%;
+	height: 25%;
+    padding: 20px;
+	margin-bottom: 20px;
+}
+
+.artist-photo img {
+    width: 100%;
+    height: 100%;
+    border-radius: 10%;
+	max-width: 100%;
+}
+
+.artist-about-text {
+    flex: 1;
+    text-align: center;
+    padding: 20px;
+    margin-left: 20px;
+	color: var(--my-lightwhite);
+}
+
+/* FOOTER */
+footer {
+	bottom: 0;
+	width: 100%;
+}
+
+.footer-text {
+	text-align: center;
+	background-color: var(--my-lightblue);
+	padding: 10px 0;
+	display: block;
+	font-family: "Balsamiq Sans", sans-serif;
+	text-decoration: none;
+	color: var(--my-lightwhite);
+}
+
+.footer-text a {
+	color: var(--my-lightwhite);
+}
+
+/* INFO */
+.infos {
+	bottom: 0;
+	width: 100%;
+	text-align: center;
+	background-color: var(--emerald);
+	padding: 10px 0;
+	display: block;
+	font-family: "Balsamiq Sans", sans-serif;
+	text-decoration: none;
+	color: var(--my-lightwhite);
+}
