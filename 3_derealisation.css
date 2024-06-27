@@ -28,10 +28,6 @@
 	.dereal-about-text {
 		width: 100%;
 	}
-
-	.about p {
-		display: block !important;
-	}
 }
 /* HEADER */
 header {
@@ -156,10 +152,6 @@ nav a:hover {
     text-align: center;
     padding: 10px;
 	color: var(--my-lightwhite);
-}
-
-.about p {
-	display: none;
 }
 
 .dereal-name {
