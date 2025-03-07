@@ -1,153 +1,73 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lore Loremips</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background-color: #1a1a1a;
-            color: #ffffff;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            line-height: 1.6;
-        }
-
-        .container {
-            text-align: center;
-            padding: 20px;
-            width: 100%;
-            max-width: 800px;
-        }
-
-        .greeting {
-            font-size: 1.2em;
-            color: #bbbbbb;
-            margin-bottom: 10px;
-            font-weight: 300;
-        }
-
-        .name {
-            font-size: 3.5em;
-            margin-bottom: 30px;
-            font-weight: 500;
-        }
-
-        .nav {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 30px;
-        }
-
-        .nav a {
-            color: #ffffff;
-            text-decoration: none;
-            font-size: 1.1em;
-            transition: color 0.3s ease;
-        }
-
-        .nav a:hover {
-            color: #bbbbbb;
-        }
-
-        .dot {
-            color: #bbbbbb;
-        }
-
-        .play-button {
-            width: 60px;
-            height: 60px;
-            border: 2px solid #ffffff;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 30px auto;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .play-button:hover {
-            transform: scale(1.1);
-            border-color: #bbbbbb;
-        }
-
-        .play-button .triangle {
-            width: 0;
-            height: 0;
-            border-style: solid;
-            border-width: 10px 0 10px 15px;
-            border-color: transparent transparent transparent #ffffff;
-            margin-left: 3px;
-        }
-
-        .music-label {
-            font-size: 1.1em;
-            color: #ffffff;
-            margin-top: 10px;
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                padding: 15px;
-            }
-
-            .name {
-                font-size: 2.5em;
-            }
-
-            .nav {
-                flex-direction: column;
-                gap: 10px;
-            }
-
-            .dot {
-                display: none;
-            }
-        }
-
-        /* Добавляем рамку как на макете */
-        .border-frame {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            bottom: 20px;
-            left: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            pointer-events: none;
-        }
-    </style>
+    <title>ihor tienietilov</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <canvas id="visualization-canvas"></canvas>
     <div class="border-frame"></div>
     <div class="container">
-        <div class="greeting">hello, my name is</div>
-        <h1 class="name">Ihor Tienietilov</h1>
-        <nav class="nav">
-            <a href="#about">about me</a>
-            <span class="dot">•</span>
-            <a href="#cv">cv</a>
-            <span class="dot">•</span>
-            <a href="#projects">projects</a>
-            <span class="dot">•</span>
-            <a href="#contact">contact</a>
-        </nav>
-        <div class="play-button">
-            <div class="triangle"></div>
+        <div class="thename">
+            <div class="greeting">hello, my name is</div>
+            <div class="name">Ihor Tienietilov</div>
         </div>
-        <div class="music-label">music</div>
+        <div class="content-wrapper">
+            <nav class="nav">
+                <a href="#about">about me</a>
+                <span class="dot">•</span>
+                <a href="#cv">cv</a>
+                <span class="dot">•</span>
+                <div class="play-button" id="play-button">
+                    <div class="triangle"></div>
+                </div>
+                <span class="dot">•</span>
+                <a href="#projects">projects</a>
+                <span class="dot">•</span>
+                <a href="#contact">contact</a>
+            </nav>
+            <div class="music-label">music</div>
+        </div>
+        
+        <!-- Добавленные секции -->
+        <div class="sections-container">
+            <section id="about" class="content-section">
+                <div class="section-label">./about me</div>
+                <div class="section-content">
+                    <p>Coming soon.</p>
+                </div>
+            </section>
+            
+            <section id="cv" class="content-section">
+                <div class="section-label">./cv</div>
+                <div class="section-content">
+                    <p>Coming soon.</p>
+                </div>
+            </section>
+            
+            <section id="projects" class="content-section">
+                <div class="section-label">./projects</div>
+                <div class="section-content">
+                    <p>Coming soon.</p>
+                </div>
+            </section>
+            
+            <section id="contact" class="content-section">
+                <div class="section-label">./contact</div>
+                <div class="section-content">
+                    <p>Coming soon.</p>
+                </div>
+            </section>
+        </div>
     </div>
+
+    <audio id="background-music" preload="auto">
+        <source src="music.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <script src="audio-visualization.js"></script>
 </body>
 </html>

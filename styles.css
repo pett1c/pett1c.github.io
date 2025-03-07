@@ -1,0 +1,237 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: #1a1a1a;
+    color: #ffffff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+#visualization-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: 0.5;
+}
+
+.container {
+    padding: 20px;
+    width: 100%;
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 1;
+	margin-top: 225px;
+}
+
+.thename {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    max-width: 500px;
+    margin: 0 auto;
+    align-self: center;
+}
+
+.greeting {
+    font-size: 1.2em;
+    color: #bbbbbb;
+    margin-bottom: 10px;
+    font-weight: 300;
+}
+
+.name {
+    font-size: 3.5em;
+    margin-bottom: 30px;
+    font-weight: 500;
+}
+
+.content-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    position: relative;
+}
+
+.nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.nav a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 1.1em;
+    transition: color 0.3s ease;
+}
+
+.nav a:hover {
+    color: #bbbbbb;
+}
+
+.dot {
+    color: #bbbbbb;
+}
+
+.play-button-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.play-button {
+    width: 60px;
+    height: 60px;
+    border: 2px solid #ffffff;
+    border-radius: 25%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.play-button:hover {
+    transform: scale(1.1);
+    border-color: #bbbbbb;
+}
+
+.play-button .triangle {
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 10px 0 10px 15px;
+    border-color: transparent transparent transparent #ffffff;
+    margin-left: 3px;
+}
+
+/* Стиль для кнопки паузы */
+.play-button.paused .triangle {
+    width: 7px;
+    height: 20px;
+    background-color: #ffffff;
+    border: none;
+    box-shadow: 10px 0 0 #ffffff;
+    align-items: center;
+	margin-right: 19%;
+}
+
+.music-label {
+    font-size: 1.1em;
+    color: #ffffff;
+    margin-left: -15px;
+    position: absolute;
+    top: 70px; /* Подобрано так, чтобы быть прямо под play button */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    text-align: center;
+}
+
+/* Стили для новых секций контента */
+.sections-container {
+    width: 100%;
+    margin-top: 250px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.content-section {
+    position: relative;
+    width: 100%;
+}
+
+.section-label {
+    position: absolute;
+    top: -24px;
+    left: 0;
+    font-size: 1em;
+    color: #bbbbbb;
+    font-weight: 300;
+}
+
+.section-content {
+    background-color: rgba(40, 40, 40, 0.5);
+    border-radius: 15px;
+    padding: 25px;
+    width: 100%;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    min-height: 150px;
+}
+
+/* Анимация появления секций при переходе по якорным ссылкам */
+.content-section:target .section-content {
+    animation: highlight 1.5s ease-out;
+}
+
+@keyframes highlight {
+    0% { background-color: rgba(80, 80, 80, 0.5); }
+    100% { background-color: rgba(40, 40, 40, 0.5); }
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+
+    .name {
+        font-size: 2.5em;
+    }
+
+    .nav {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .dot {
+        display: none;
+    }
+    
+    .section-content {
+        padding: 20px;
+    }
+}
+
+/* Добавляем рамку как на макете */
+.border-frame {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    bottom: 20px;
+    left: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    pointer-events: none;
+    z-index: 2;
+}
+
+/* Добавляем плавную прокрутку для всей страницы */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Исправление для мобильных устройств */
+@media (max-width: 768px) {
+    body {
+        overflow-y: auto;
+    }
+}
