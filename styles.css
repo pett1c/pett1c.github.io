@@ -141,7 +141,7 @@ body {
     margin-left: -15px;
     position: absolute;
     top: 70px; /* Подобрано так, чтобы быть прямо под play button */
-    left: 50%;
+    left: 51.5%;
     transform: translateX(-50%);
     width: 100%;
     text-align: center;
@@ -150,7 +150,7 @@ body {
 /* Стили для новых секций контента */
 .sections-container {
     width: 100%;
-    margin-top: 250px;
+    margin-top: 350px;
     display: flex;
     flex-direction: column;
     gap: 40px;
@@ -184,6 +184,456 @@ body {
     animation: highlight 1.5s ease-out;
 }
 
+/* Стили для контейнера проектов */
+.projects-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    width: 100%;
+}
+
+/* Стили для карточки проекта */
+.project-card {
+    flex: 1;
+    background-color: rgba(40, 40, 40, 0.7);
+    border-radius: 15px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 400px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.project-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(0, 210, 255, 0.3);
+    border-color: rgba(0, 210, 255, 0.3);
+}
+
+/* Заголовок проекта */
+.project-title {
+    padding: 15px;
+    font-size: 1.2em;
+    font-weight: 500;
+    text-align: center;
+    background-color: rgba(26, 26, 26, 0.8);
+    z-index: 1;
+}
+
+/* Контейнер для GIF */
+.project-gif {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+}
+
+.project-gif img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 0.3s ease;
+}
+
+.static-img {
+    opacity: 0.6;
+}
+
+.gif-img {
+    opacity: 0;
+}
+
+.project-card:hover .static-img {
+    opacity: 0;
+}
+
+.project-card:hover .gif-img {
+    opacity: 1;
+}
+
+/* Теги проекта */
+.project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 15px;
+    background-color: rgba(26, 26, 26, 0.8);
+    z-index: 1;
+}
+
+.tag {
+    background-color: rgba(0, 210, 255, 0.2);
+    border: 1px solid rgba(0, 210, 255, 0.4);
+    color: #ffffff;
+    font-size: 0.8em;
+    padding: 4px 8px;
+    border-radius: 10px;
+}
+
+/* Стили для блока с цитатой */
+.quote-container {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 40px;
+    position: relative;
+}
+
+.quote {
+    position: relative;
+    display: inline-block;
+    max-width: 90%;
+}
+
+.quote-text {
+    font-size: 1.4em;
+    font-weight: 300;
+    font-style: italic;
+    letter-spacing: 0.5px;
+    line-height: 1.4;
+    color: transparent;
+    background: linear-gradient(45deg, #00d2ff, #b14eff);
+    background-clip: text;
+    -webkit-background-clip: text;
+    position: relative;
+    display: block;
+    padding: 5px 0;
+    transition: all 0.3s ease;
+}
+
+.quote-text:hover {
+    text-shadow: 0 0 15px rgba(177, 78, 255, 0.3);
+    transform: scale(1.01);
+}
+
+/* Обновленные стили для секции about */
+.about-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    width: 100%;
+    align-items: center;
+    min-height: 320px;
+}
+
+/* Стили для колонок */
+.about-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.center-column {
+    padding: 0 10px;
+}
+
+/* Контейнер для текста */
+.about-text-container {
+    max-width: 100%;
+    text-align: left;
+}
+
+/* Стили для текста в центральной колонке */
+.center-column p {
+    margin-bottom: 16px;
+    line-height: 1.5;
+    font-size: 1em;
+    opacity: 0.9;
+}
+
+.center-column p:last-child {
+    margin-bottom: 0;
+}
+
+/* Стили для контейнера изображения */
+.image-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background-color: rgba(40, 40, 40, 0.7);
+    border-radius: 15px;
+    padding: 15px;
+    width: 100%;
+    max-width: 240px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+/* Стили для названий проектов */
+.left-column .image-top-text {
+    color: #00d2ff; /* Голубой цвет для wh01sme */
+    font-weight: 500;
+}
+
+.right-column .image-top-text {
+    color: #b14eff; /* Фиолетовый цвет для fr31tagabend */
+    font-weight: 500;
+}
+
+/* Стили для ховер-эффектов */
+.left-column .image-container:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 20px rgba(0, 210, 255, 0.3);
+    border-color: rgba(0, 210, 255, 0.3);
+}
+
+.right-column .image-container:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 20px rgba(177, 78, 255, 0.3);
+    border-color: rgba(177, 78, 255, 0.3);
+}
+
+/* Стили для обертки изображения */
+.image-wrapper {
+    width: 100%;
+    margin: 12px 0;
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    aspect-ratio: 1/1; /* Делаем изображение квадратным */
+}
+
+/* Стили для изображения */
+.about-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+}
+
+.image-wrapper:hover .about-image {
+    transform: scale(1.05);
+}
+
+/* Стили для текста над и под изображением */
+.image-top-text {
+    font-size: 1.1em;
+    margin-bottom: 5px;
+}
+
+.image-bottom-text {
+    font-size: 0.9em;
+    color: #bbbbbb;
+    margin-top: 5px;
+    font-weight: 300;
+}
+
+/* Стили для контейнера контактов - аналогично about-container */
+.contact-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    width: 100%;
+    align-items: center;
+    min-height: 320px;
+}
+
+/* Колонки контактов - аналогично about-column */
+.contact-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Стили для больших иконок (Gmail и LinkedIn) */
+.contact-icon-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background-color: rgba(40, 40, 40, 0.7);
+    border-radius: 15px;
+    padding: 15px;
+    width: 100%;
+    max-width: 240px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+/* Стили для обертки иконок */
+.contact-icon-wrapper {
+    width: 100%;
+    margin: 12px 0;
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    aspect-ratio: 1/1; /* Квадратное соотношение сторон */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(26, 26, 26, 0.5);
+    padding: 20px;
+}
+
+/* Стили для самих иконок */
+.contact-icon {
+    width: 100%;
+    height: 100%;
+    transition: transform 0.3s ease;
+    fill: #ffffff;
+}
+
+/* Gmail-специфичные стили */
+.gmail-container {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.gmail-container:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 20px rgba(234, 67, 53, 0.3);
+    border-color: rgba(234, 67, 53, 0.3);
+}
+
+.gmail-icon {
+    fill: #EA4335;
+}
+
+/* LinkedIn-специфичные стили */
+.linkedin-container {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.linkedin-container:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 20px rgba(0, 119, 181, 0.3);
+    border-color: rgba(0, 119, 181, 0.3);
+}
+
+.linkedin-icon {
+    fill: #0077B5;
+}
+
+/* Подписи к иконкам */
+.contact-icon-label {
+    font-size: 1.1em;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+.contact-icon-caption {
+    font-size: 0.9em;
+    color: #bbbbbb;
+    margin-top: 5px;
+    font-weight: 300;
+}
+
+/* Стили для центральной колонки с социальными сетями */
+.social-icons-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 15px;
+    width: 100%;
+    max-width: 300px;
+}
+
+.social-link {
+    text-decoration: none;
+    color: #ffffff;
+}
+
+.social-icon-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(40, 40, 40, 0.7);
+    border-radius: 10px;
+    padding: 15px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    height: 100%;
+}
+
+.social-icon-wrapper svg {
+    width: 32px;
+    height: 32px;
+    margin-bottom: 8px;
+    transition: transform 0.3s ease;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.icon-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.telegram-icon svg {
+    width: 36px;
+    height: 36px;
+}
+
+.social-name {
+    font-size: 0.8em;
+    margin-top: 5px;
+}
+
+/* Стили для разных соцсетей */
+.telegram-logo {
+    width: 32px;
+    height: 32px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.telegram-logo svg {
+    width: 100%;
+    height: 100%;
+}
+
+.telegram-icon:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(0, 136, 204, 0.3);
+    border-color: rgba(0, 136, 204, 0.3);
+}
+
+.instagram-icon svg {
+    fill: #E1306C;
+}
+
+.instagram-icon:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(225, 48, 108, 0.3);
+    border-color: rgba(225, 48, 108, 0.3);
+}
+
+.discord-icon svg {
+    fill: #7289DA;
+}
+
+.discord-icon:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(114, 137, 218, 0.3);
+    border-color: rgba(114, 137, 218, 0.3);
+}
+
+.github-icon svg {
+    fill: #ffffff;
+}
+
+.github-icon:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
 @keyframes highlight {
     0% { background-color: rgba(80, 80, 80, 0.5); }
     100% { background-color: rgba(40, 40, 40, 0.5); }
@@ -209,6 +659,54 @@ body {
     
     .section-content {
         padding: 20px;
+    }
+	.projects-container {
+        flex-direction: column;
+    }
+    
+    .project-card {
+        height: 300px;
+        margin-bottom: 20px;
+    }
+
+    .about-container {
+        flex-direction: column;
+        min-height: auto;
+    }
+    
+    .about-column {
+        margin-bottom: 30px;
+        width: 100%;
+    }
+    
+    .image-container {
+        max-width: 280px;
+    }
+    
+    .center-column {
+        order: -1; /* Показываем текст первым на мобильных */
+    }
+
+    .contact-container {
+        flex-direction: column;
+        min-height: auto;
+    }
+    
+    .contact-column {
+        margin-bottom: 30px;
+        width: 100%;
+    }
+    
+    .contact-icon-container {
+        max-width: 280px;
+    }
+    
+    .center-column {
+        order: -1; /* Показываем соцсети первыми на мобильных */
+    }
+    
+    .social-icons-container {
+        max-width: 100%;
     }
 }
 
