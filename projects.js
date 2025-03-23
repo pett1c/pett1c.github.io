@@ -7,12 +7,12 @@ document.addEventListener('DOMContentLoaded', function() {
             gif: "flewe.gif"
         },
         {
-            static: "https://via.placeholder.com/300x400/1a1a1a/333333?text=Project+2",
-            gif: "https://via.placeholder.com/300x400/1a1a1a/00d2ff?text=Animated+Project+2"
+            static: "placeholder2.png",
+            gif: "placeholder2.gif"
         },
         {
-            static: "https://via.placeholder.com/300x400/1a1a1a/333333?text=Project+3",
-            gif: "https://via.placeholder.com/300x400/1a1a1a/00d2ff?text=Animated+Project+3"
+            static: "placeholder3.png",
+            gif: "placeholder3.png"
         }
     ];
     

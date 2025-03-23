@@ -130,11 +130,9 @@ function createVolumeControl(audioElement) {
 	
 	// Добавляем обработчик событий для слайдера
 	slider.addEventListener('input', function() {
-		// Обновляем громкость аудио
+		// Обновляем только gainNode, НЕ обновляем audioElement.volume
 		const volume = parseFloat(this.value) / 100;
-		audioElement.volume = volume;
 		
-		// Если есть gainNode, обновляем его тоже
 		if (gainNode && audioContext) {
 			gainNode.gain.value = volume;
 		}
@@ -397,9 +395,8 @@ function createCombinedControls(audioElement) {
 	// Добавляем обработчик событий для слайдера громкости
 	volumeSlider.addEventListener('input', function() {
 		const volume = parseFloat(this.value) / 100;
-		audioElement.volume = volume;
 		
-		// Если есть gainNode, обновляем его тоже
+		// Обновляем только gainNode, НЕ обновляем audioElement.volume
 		if (gainNode && audioContext) {
 			gainNode.gain.value = volume;
 		}
@@ -572,47 +569,60 @@ const colors = [
 
 // Инициализация Web Audio API
 function initAudio() {
-	// Создаем аудио контекст
-	audioContext = new (window.AudioContext || window.webkitAudioContext)();
-	
-	// Создаем разделитель каналов
-	splitter = audioContext.createChannelSplitter(2);
-	
-	// Создаем анализаторы для левого и правого каналов
-	analyserLeft = audioContext.createAnalyser();
-	analyserRight = audioContext.createAnalyser();
-	
-	// Настраиваем анализаторы
-	analyserLeft.fftSize = 1024;
-	analyserRight.fftSize = 1024;
-	
-	// Устанавливаем smoothingTimeConstant для более плавной визуализации
-	analyserLeft.smoothingTimeConstant = 0.5;
-	analyserRight.smoothingTimeConstant = 0.5;
-	
-	bufferLength = analyserLeft.fftSize;
-	
-	// Создаем массивы для хранения временной области данных (не частотной!)
-	dataArrayLeft = new Float32Array(bufferLength);
-	dataArrayRight = new Float32Array(bufferLength);
-	
-	// Создаем источник из элемента audio
-	audioSource = audioContext.createMediaElementSource(audio);
-	
-	// Создаем ноду для управления громкостью
-	gainNode = audioContext.createGain();
-	gainNode.gain.value = audio.volume; // Устанавливаем значение из элемента audio
-	
-	// Подключаем источник к gainNode, а gainNode к разделителю каналов
-	audioSource.connect(gainNode);
-	gainNode.connect(splitter);
-	
-	// Подключаем каналы к соответствующим анализаторам
-	splitter.connect(analyserLeft, 0);
-	splitter.connect(analyserRight, 1);
-	
-	// Подключаем gainNode к выходу
-	gainNode.connect(audioContext.destination);
+    // Создаем аудио контекст
+    audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    
+    // Создаем источник из элемента audio
+    audioSource = audioContext.createMediaElementSource(audio);
+    
+    // Создаем разделитель каналов для визуализации (без регулировки громкости)
+    splitter = audioContext.createChannelSplitter(2);
+    
+    // Создаем анализаторы для левого и правого каналов
+    analyserLeft = audioContext.createAnalyser();
+    analyserRight = audioContext.createAnalyser();
+    
+    // Настраиваем анализаторы
+    analyserLeft.fftSize = 1024;
+    analyserRight.fftSize = 1024;
+    analyserLeft.smoothingTimeConstant = 0.5;
+    analyserRight.smoothingTimeConstant = 0.5;
+    
+    // Устанавливаем максимальную чувствительность для анализаторов
+    analyserLeft.minDecibels = -90;
+    analyserLeft.maxDecibels = -10;
+    analyserRight.minDecibels = -90;
+    analyserRight.maxDecibels = -10;
+    
+    bufferLength = analyserLeft.fftSize;
+    
+    // Создаем массивы для хранения временной области данных
+    dataArrayLeft = new Float32Array(bufferLength);
+    dataArrayRight = new Float32Array(bufferLength);
+    
+    // Создаем дополнительный усилитель для визуализации на полной громкости
+    const visualizerGain = audioContext.createGain();
+    visualizerGain.gain.value = 1.0; // Всегда на максимуме для визуализации
+    
+    // Создаем ноду для управления громкостью звука
+    gainNode = audioContext.createGain();
+    gainNode.gain.value = audio.volume;
+    
+    // Подключаем аудиоисточник к двум разным путям:
+    
+    // 1. Путь для визуализации (всегда макс. громкость)
+    audioSource.connect(visualizerGain);
+    visualizerGain.connect(splitter);
+    splitter.connect(analyserLeft, 0);
+    splitter.connect(analyserRight, 1);
+    
+    // 2. Путь для воспроизведения звука (регулируемая громкость)
+    audioSource.connect(gainNode);
+    gainNode.connect(audioContext.destination);
+    
+    // Отключаем встроенную громкость аудиоэлемента, 
+    // будем полностью контролировать через gainNode
+    audio.volume = 1.0;
 }
 
 // Функция для применения вращения к точке
@@ -634,101 +644,114 @@ function rotatePoint(x, y, centerX, centerY, angle) {
 
 // Функция для рисования VectorScope
 function drawVectorScope() {
-	// Получаем данные временной области с анализаторов
-	analyserLeft.getFloatTimeDomainData(dataArrayLeft);
-	analyserRight.getFloatTimeDomainData(dataArrayRight);
-	
-	// Полупрозрачная очистка канваса для эффекта затухания
-	ctx.fillStyle = 'rgba(26, 26, 26, 0.15)';
-	ctx.fillRect(0, 0, canvas.width, canvas.height);
-	
-	// Определяем центр и размер визуализации
-	const centerX = canvas.width / 2;
-	const centerY = canvas.height / 2;
-	const radius = Math.min(canvas.width, canvas.height) * 0.3;
-	
-	// Увеличиваем угол вращения
-	rotationAngle += rotationSpeed;
-	if (rotationAngle > Math.PI * 2) {
-		rotationAngle -= Math.PI * 2; // Сброс угла для предотвращения переполнения
-	}
-	
-	// Рисуем фоновые элементы VectorScope
-	drawVectorScopeBackground(centerX, centerY, radius);
-	
-	// Создаем массив точек для текущего кадра
-	const points = [];
-	const sampleStep = Math.floor(bufferLength / 256); // Прореживаем образцы для производительности
-	
-	for (let i = 0; i < bufferLength; i += sampleStep) {
-		// Получаем значения левого и правого каналов
-		const leftValue = dataArrayLeft[i];
-		const rightValue = dataArrayRight[i];
-		
-		// Преобразуем значения в координаты
-		// В VectorScope левый канал обычно на оси X, правый - на оси Y
-		const rawX = centerX + radius * leftValue;
-		const rawY = centerY + radius * rightValue;
-		
-		// Применяем вращение
-		const rotated = rotatePoint(rawX, rawY, centerX, centerY, rotationAngle);
-		
-		points.push(rotated);
-	}
-	
-	// Добавляем новые точки в историю
-	trailHistory.unshift(points);
-	
-	// Ограничиваем длину истории
-	if (trailHistory.length > trailLength) {
-		trailHistory.pop();
-	}
-	
-	// Рисуем точки с эффектом затухания
-	for (let t = 0; t < trailHistory.length; t++) {
-		const framePoints = trailHistory[t];
-		const opacity = 1 - (t / trailLength);
-		
-		for (let i = 0; i < framePoints.length; i++) {
-			const point = framePoints[i];
-			
-			// Выбираем цвет из палитры в зависимости от положения
-			const colorIndex = Math.min(
-				Math.floor(Math.sqrt(
-					Math.pow((point.x - centerX) / radius, 2) + 
-					Math.pow((point.y - centerY) / radius, 2)
-				) * colors.length),
-				colors.length - 1
-			);
-			
-			const color = colors[colorIndex];
-			
-			// Рисуем точку
-			ctx.beginPath();
-			ctx.arc(point.x, point.y, 2, 0, Math.PI * 2);
-			ctx.fillStyle = `rgba(${color.r}, ${color.g}, ${color.b}, ${opacity})`;
-			ctx.fill();
-		}
-	}
-	
-	// Рисуем соединительные линии для текущего кадра
-	if (points.length > 0) {
-		ctx.beginPath();
-		ctx.moveTo(points[0].x, points[0].y);
-		
-		for (let i = 1; i < points.length; i++) {
-			ctx.lineTo(points[i].x, points[i].y);
-		}
-		
-		ctx.strokeStyle = 'rgba(255, 255, 255, 0.6)';
-		ctx.lineWidth = 1;
-		ctx.stroke();
-	}
-	
-	// Продолжаем анимацию если воспроизведение активно
-	if (isPlaying) {
-		animationId = requestAnimationFrame(drawVectorScope);
-	}
+    // Получаем данные временной области с анализаторов
+    analyserLeft.getFloatTimeDomainData(dataArrayLeft);
+    analyserRight.getFloatTimeDomainData(dataArrayRight);
+
+    // Определяем максимальную амплитуду для нормализации
+    let maxAmplitude = 0.01; // Минимальное значение, чтобы избежать деления на ноль
+    
+    // Находим максимальное значение в данных
+    for (let i = 0; i < bufferLength; i++) {
+        const leftAbs = Math.abs(dataArrayLeft[i]);
+        const rightAbs = Math.abs(dataArrayRight[i]);
+        maxAmplitude = Math.max(maxAmplitude, leftAbs, rightAbs);
+    }
+    
+    // Коэффициент нормализации (усиление для низких уровней сигнала)
+    const normalizationFactor = Math.min(1.0 / maxAmplitude, 4.0); // Ограничиваем усиление
+    
+    // Полупрозрачная очистка канваса для эффекта затухания
+    ctx.fillStyle = 'rgba(26, 26, 26, 0.15)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    
+    // Определяем центр и размер визуализации
+    const centerX = canvas.width / 2;
+    const centerY = canvas.height / 2;
+    const radius = Math.min(canvas.width, canvas.height) * 0.3;
+    
+    // Увеличиваем угол вращения
+    rotationAngle += rotationSpeed;
+    if (rotationAngle > Math.PI * 2) {
+        rotationAngle -= Math.PI * 2; // Сброс угла для предотвращения переполнения
+    }
+    
+    // Рисуем фоновые элементы VectorScope
+    drawVectorScopeBackground(centerX, centerY, radius);
+    
+    // Создаем массив точек для текущего кадра
+    const points = [];
+    const sampleStep = Math.floor(bufferLength / 256); // Прореживаем образцы для производительности
+    
+    for (let i = 0; i < bufferLength; i += sampleStep) {
+        // Получаем значения левого и правого каналов и нормализуем их
+        const leftValue = dataArrayLeft[i] * normalizationFactor;
+        const rightValue = dataArrayRight[i] * normalizationFactor;
+        
+        // Преобразуем значения в координаты
+        // В VectorScope левый канал обычно на оси X, правый - на оси Y
+        const rawX = centerX + radius * leftValue;
+        const rawY = centerY + radius * rightValue;
+        
+        // Применяем вращение
+        const rotated = rotatePoint(rawX, rawY, centerX, centerY, rotationAngle);
+        
+        points.push(rotated);
+    }
+    
+    // Добавляем новые точки в историю
+    trailHistory.unshift(points);
+    
+    // Ограничиваем длину истории
+    if (trailHistory.length > trailLength) {
+        trailHistory.pop();
+    }
+    
+    // Рисуем точки с эффектом затухания
+    for (let t = 0; t < trailHistory.length; t++) {
+        const framePoints = trailHistory[t];
+        const opacity = 1 - (t / trailLength);
+        
+        for (let i = 0; i < framePoints.length; i++) {
+            const point = framePoints[i];
+            
+            // Выбираем цвет из палитры в зависимости от положения
+            const colorIndex = Math.min(
+                Math.floor(Math.sqrt(
+                    Math.pow((point.x - centerX) / radius, 2) + 
+                    Math.pow((point.y - centerY) / radius, 2)
+                ) * colors.length),
+                colors.length - 1
+            );
+            
+            const color = colors[colorIndex];
+            
+            // Рисуем точку
+            ctx.beginPath();
+            ctx.arc(point.x, point.y, 2, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(${color.r}, ${color.g}, ${color.b}, ${opacity})`;
+            ctx.fill();
+        }
+    }
+    
+    // Рисуем соединительные линии для текущего кадра
+    if (points.length > 0) {
+        ctx.beginPath();
+        ctx.moveTo(points[0].x, points[0].y);
+        
+        for (let i = 1; i < points.length; i++) {
+            ctx.lineTo(points[i].x, points[i].y);
+        }
+        
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.6)';
+        ctx.lineWidth = 1;
+        ctx.stroke();
+    }
+    
+    // Продолжаем анимацию если воспроизведение активно
+    if (isPlaying) {
+        animationId = requestAnimationFrame(drawVectorScope);
+    }
 }
 
 // Рисуем фоновые элементы VectorScope

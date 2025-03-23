@@ -8,7 +8,10 @@ body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     background-color: #1a1a1a;
     color: #ffffff;
+	position: relative;
     min-height: 100vh;
+	margin: 0;
+	padding-bottom: 40px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -639,6 +642,7 @@ body {
     100% { background-color: rgba(40, 40, 40, 0.5); }
 }
 
+/* Обновляем медиа-запрос для мобильных устройств */
 @media (max-width: 768px) {
     .container {
         padding: 15px;
@@ -648,78 +652,173 @@ body {
         font-size: 2.5em;
     }
 
+    /* Фиксируем навигационную панель, чтобы она выглядела как на ПК */
     .nav {
-        flex-direction: column;
-        gap: 10px;
+        flex-direction: row; /* Заменяем на row вместо column */
+        flex-wrap: wrap; /* Разрешаем перенос при необходимости */
+        justify-content: center;
+        gap: 15px; /* Возвращаем исходный отступ как на ПК */
     }
 
+    /* Возвращаем точки в навигации */
     .dot {
-        display: none;
+        display: inline; /* Отображаем точки, которые были скрыты */
     }
-    
-    .section-content {
-        padding: 20px;
-    }
-	.projects-container {
+
+    /* Проекты должны идти сверху вниз */
+    .projects-container {
         flex-direction: column;
     }
     
     .project-card {
         height: 300px;
         margin-bottom: 20px;
+        width: 100%; /* Занимает всю ширину */
+    }
+    
+    /* Исправляем проблему с отображением изображений в проектах */
+    .project-gif img {
+        position: relative; /* Меняем absolute на relative для мобильных */
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+    }
+    
+    /* На мобильных показываем GIF сразу без ховера */
+    .static-img {
+        display: none; /* Скрываем статичное изображение */
+    }
+    
+    .gif-img {
+        opacity: 1 !important; /* Всегда показываем GIF */
     }
 
+    /* Обновляем верстку для секции about me */
     .about-container {
         flex-direction: column;
         min-height: auto;
     }
     
+    /* Центрируем текст в секции about me */
+    .center-column .about-text-container {
+        text-align: center;
+        margin: 0 auto;
+        max-width: 90%;
+        padding: 0 10px;
+    }
+    
+    /* Устанавливаем особый порядок для about-column */
     .about-column {
         margin-bottom: 30px;
         width: 100%;
     }
     
-    .image-container {
-        max-width: 280px;
+    /* Текст должен быть первым */
+    .center-column {
+        order: 1; 
     }
     
-    .center-column {
-        order: -1; /* Показываем текст первым на мобильных */
+    /* Затем идут боковые блоки один слева - другой справа */
+    .about-container:after {
+        content: "";
+        display: table;
+        clear: both; /* Очищаем поток для корректного отображения */
     }
-
+    
+    .left-column {
+        order: 2;
+        float: left;
+        width: 75%;
+    }
+    
+    .right-column {
+        order: 2;
+        float: right;
+        width: 75%;
+    }
+    
+    /* Контейнеры с изображениями подстраиваем под новый размер */
+    .image-container {
+        max-width: 100%;
+    }
+    
+    /* Обновляем контакты так же, как about */
     .contact-container {
         flex-direction: column;
         min-height: auto;
     }
     
-    .contact-column {
+    /* Соцсети первыми */
+    .contact-column.center-column {
+        order: 1;
         margin-bottom: 30px;
         width: 100%;
     }
     
-    .contact-icon-container {
-        max-width: 280px;
+    /* Затем gmail и linkedin один слева - другой справа (аналогично about me) */
+    .contact-container:after {
+        content: "";
+        display: table;
+        clear: both; /* Очищаем поток для корректного отображения */
     }
     
-    .center-column {
-        order: -1; /* Показываем соцсети первыми на мобильных */
+    .contact-column.left-column {
+        order: 2;
+        float: left;
+        width: 75%;
+    }
+    
+    .contact-column.right-column {
+        order: 3;
+        float: right;
+        width: 75%;
+    }
+    
+    .contact-icon-container {
+        max-width: 100%;
     }
     
     .social-icons-container {
         max-width: 100%;
     }
+    
+    /* Увеличим размер шрифта для лучшей читаемости на мобильных */
+    .section-content p {
+        font-size: 1.1em;
+    }
+
+    /* Обеспечим корректное отображение на очень маленьких экранах */
+    @media (max-width: 480px) {
+        .left-column, .right-column {
+            float: none; /* Отменяем float */
+            width: 100%;
+            margin: 0 0 20px 0;
+        }
+        
+        .nav {
+            gap: 10px;
+        }
+        
+        .play-button {
+            width: 50px;
+            height: 50px;
+        }
+    }
 }
 
 /* Добавляем рамку как на макете */
 .border-frame {
-    position: fixed;
+    position: absolute;
     top: 20px;
     right: 20px;
-    bottom: 20px;
     left: 20px;
+    /* Удаляем bottom и устанавливаем высоту, которая адаптируется к содержимому */
+    min-height: calc(100% - 40px); /* 100% минус отступы сверху и снизу */
     border: 1px solid rgba(255, 255, 255, 0.1);
     pointer-events: none;
     z-index: 2;
+    /* Добавляем небольшой отступ снизу */
+    margin-bottom: 20px;
 }
 
 /* Добавляем плавную прокрутку для всей страницы */
